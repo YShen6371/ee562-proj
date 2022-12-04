@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# pytorch model and dataset
+Fashion*
+*.pt

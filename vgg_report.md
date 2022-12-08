@@ -2,9 +2,9 @@ Original data transform:
 
 ```python
 data_transform = transforms.Compose([
-                                     transforms.Resize((224, 224)),
-                                     transforms.ToTensor(),
-                                     transforms.Normalize([0.5], [0.5])])
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.5], [0.5])])
 ```
 
 Result:
@@ -17,11 +17,11 @@ best validation accuracy is 92.4300 percent
 Try data aumentation
 ```python
 data_transform = transforms.Compose([
-                                     transforms.Resize((224, 224)),
-                                     transforms.ToTensor(),
-                                     transforms.RandomHorizontalFlip(0.5),
-                                     transforms.RandomAffine((-5, 5), shear=(-10, 10)),
-                                     transforms.Normalize([0.5], [0.5])])
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.RandomHorizontalFlip(0.5),
+    transforms.RandomAffine((-5, 5), shear=(-10, 10)),
+    transforms.Normalize([0.5], [0.5])])
 ```
 
 Result:

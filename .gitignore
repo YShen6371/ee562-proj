@@ -131,3 +131,4 @@ dmypy.json
 # pytorch model and dataset
 Fashion*
 *.pt
+*.png

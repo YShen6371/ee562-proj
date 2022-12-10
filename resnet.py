@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 import torch.optim as optim
 import numpy as np
+import matplotlib.pyplot as plt
 
 # PyTorch ResNet-18 is used to FashionMnist dataset
 # Reference: https://colab.research.google.com/github/kjamithash/Pytorch_DeepLearning_Experiments/blob/master/FashionMNIST_ResNet_TransferLearning.ipynb
@@ -36,14 +37,18 @@ def get_data_loader(train_transformer, valid_transformer, batch_size):
                             batch_size=batch_size, shuffle=False)
     return train_loader, val_loader
 
-epochs = 5
-batch_size = 200
+epochs = 10
+batch_size = 180
 data_transform = transforms.Compose([ transforms.Resize((224, 224)),
                                      transforms.ToTensor(),
+                                     transforms.RandomHorizontalFlip(p=0.5),
                                      transforms.Normalize([0.5], [0.5])])
 train_loader, val_loader = get_data_loader(data_transform, data_transform, batch_size)
-loss_function = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=3e-4)
+#loss_function = nn.CrossEntropyLoss()
+loss_function = nn.MSELoss()
+optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4)
+#optimizer = torch.optim.Adam(model.parameters(), lr=3e-4)
+#optimizer = torch.optim.SGD(model.parameters(), lr=1e-3, momentum=0.9)
 train_losses = []
 valid_losses = []
 train_accs = []
@@ -102,6 +107,15 @@ for epoch in range(epochs):
 
 print("-"*60)
 print("best validation accuracy is %.4f percent" % (np.max(valid_accs) * 100) )
+
+# plot accuracy and loss versus epoch
+plt.plot(range(epochs), train_losses, label = 'train_loss')
+plt.plot(range(epochs), train_accs, label = 'train_acc')
+plt.plot(range(epochs), valid_losses, label = 'valid_loss')
+plt.plot(range(epochs), valid_accs, label = 'valid_acc')
+plt.legend()
+plt.savefig("%s.png" % str(valid_accs[-1]))
+plt.show()
 
 # save the model for future reference
 torch.save(model, "%s.pt" % str(valid_accs[-1]))

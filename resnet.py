@@ -37,17 +37,15 @@ def get_data_loader(train_transformer, valid_transformer, batch_size):
                             batch_size=batch_size, shuffle=False)
     return train_loader, val_loader
 
-epochs = 10
+epochs = 5
 batch_size = 180
 data_transform = transforms.Compose([ transforms.Resize((224, 224)),
                                      transforms.ToTensor(),
-                                     transforms.RandomHorizontalFlip(p=0.5),
+                                     #transforms.RandomHorizontalFlip(p=0.5),
                                      transforms.Normalize([0.5], [0.5])])
 train_loader, val_loader = get_data_loader(data_transform, data_transform, batch_size)
-#loss_function = nn.CrossEntropyLoss()
-loss_function = nn.MSELoss()
-optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4)
-#optimizer = torch.optim.Adam(model.parameters(), lr=3e-4)
+#optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4)
+optimizer = torch.optim.Adam(model.parameters(), lr=3e-4)
 #optimizer = torch.optim.SGD(model.parameters(), lr=1e-3, momentum=0.9)
 train_losses = []
 valid_losses = []

@@ -60,6 +60,7 @@ data_transform = transforms.Compose([
     transforms.Normalize([0.5], [0.5])])
 ```
 
+Result:
 ```bash
 100%|██████████| 1875/1875 [51:11<00:00,  1.64s/it]
 train Accuracy: 0.8417166666666667
@@ -83,4 +84,40 @@ train Accuracy: 0.94485
 valid Accuracy: 0.9207
 ------------------------------------------------------------
 best validation accuracy is 92.1100 percent
+```
+
+```python
+data_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.RandomHorizontalFlip(0.5),
+    transforms.RandomVerticalFlip(0.5),
+    transforms.RandomRotation(degrees=(0, 180)),
+    transforms.Normalize([0.5], [0.5])]
+```
+
+Result:
+```bash
+100%|██████████| 1875/1875 [12:17<00:00,  2.54it/s]
+train Accuracy: 0.6445666666666666
+100%|██████████| 313/313 [00:59<00:00,  5.22it/s]
+valid Accuracy: 0.7217
+100%|██████████| 1875/1875 [12:08<00:00,  2.57it/s]
+train Accuracy: 0.7878333333333334
+100%|██████████| 313/313 [00:59<00:00,  5.25it/s]
+valid Accuracy: 0.8099
+100%|██████████| 1875/1875 [12:05<00:00,  2.58it/s]
+train Accuracy: 0.8276833333333333
+100%|██████████| 313/313 [00:59<00:00,  5.25it/s]
+valid Accuracy: 0.8305
+100%|██████████| 1875/1875 [12:04<00:00,  2.59it/s]
+train Accuracy: 0.8485
+100%|██████████| 313/313 [01:00<00:00,  5.20it/s]
+valid Accuracy: 0.8514
+100%|██████████| 1875/1875 [12:04<00:00,  2.59it/s]
+train Accuracy: 0.8606333333333334
+100%|██████████| 313/313 [00:59<00:00,  5.25it/s]
+valid Accuracy: 0.8555
+------------------------------------------------------------
+best validation accuracy is 85.5500 percent
 ```

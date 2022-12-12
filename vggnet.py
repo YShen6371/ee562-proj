@@ -13,9 +13,9 @@ import random
 from torch.utils.data.dataloader import default_collate
 from torchsummary import summary
 
+
 # %%
-
-
+# Reference: https://pytorch.org/hub/pytorch_vision_vgg/
 class VGGNet(nn.Module):
     def __init__(self):
         super(VGGNet, self).__init__()
